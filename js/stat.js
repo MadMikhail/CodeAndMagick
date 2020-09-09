@@ -5,7 +5,6 @@ var CLOUD_X = 260;
 var CLOUD_Y = 190;
 var GAP = 10;
 var FONT_GAP = 15;
-var TEXT_WIDTH = 13;
 var BAR_HEIGHT = 100;
 var barWidth = 50;
 
@@ -85,21 +84,19 @@ window.renderStatistics = function(ctx, names, times){
     ctx.fillText('Список результатов:', 80, 120 );
     var maxTime = getMaxElement(times);
 
-    
-    
-    
+    //Получаем случайный синий
     function getRandomBlue(){
         var randomColor = 'rgba(0, 0, 255,'   + Math.random(1).toFixed(2)  + ' )';
         return randomColor;
     }
-
-  
+ 
     for (var i = 0; i < names.length; i++){
         ctx.fillStyle = "black";
         ctx.fillText(names[i], CLOUD_X + GAP   + ((GAP + barWidth + FONT_GAP) * i), CLOUD_Y + GAP);
-        ctx.fillStyle = getRandomBlue();
+        if(names[i] == "Вы"){
+            ctx.fillStyle = "red";
+        } else {ctx.fillStyle = getRandomBlue();}
         ctx.fillRect(CLOUD_X + GAP  + ((GAP + barWidth + FONT_GAP ) * i), CLOUD_Y - GAP , barWidth, (-BAR_HEIGHT * times[i] / maxTime));
     }
-    names[1] = ctx.fillStyle = 'black';
-    
+
 };
